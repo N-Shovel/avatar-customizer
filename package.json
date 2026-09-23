@@ -1,0 +1,23 @@
+{
+  "name": "avatar-customizer",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Create a custom Minecraft skin in the browser and export it as a PNG.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "generate:parts": "node scripts/generate-parts.mjs"
+  },
+  "dependencies": {
+    "skinview3d": "^3.4.2",
+    "three": "^0.156.1"
+  },
+  "devDependencies": {
+    "typescript": "^7.0.2",
+    "vite": "^8.3.0",
+    "vitest": "^5.0.1"
+  }
+}

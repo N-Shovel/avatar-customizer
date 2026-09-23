@@ -1,0 +1,80 @@
+[
+  {
+    "id": "hair-short",
+    "name": "Short",
+    "category": "hair",
+    "recolorable": true,
+    "defaultColor": "#5a3825",
+    "file": "hair/hair-short.png"
+  },
+  {
+    "id": "hair-long",
+    "name": "Long",
+    "category": "hair",
+    "recolorable": true,
+    "defaultColor": "#d9a441",
+    "file": "hair/hair-long.png"
+  },
+  {
+    "id": "face-smile",
+    "name": "Smile",
+    "category": "faces",
+    "recolorable": false,
+    "file": "faces/face-smile.png"
+  },
+  {
+    "id": "shirt-tee",
+    "name": "T-shirt",
+    "category": "shirts",
+    "recolorable": true,
+    "defaultColor": "#2563eb",
+    "file": "shirts/shirt-tee.png"
+  },
+  {
+    "id": "shirt-hoodie",
+    "name": "Hoodie",
+    "category": "shirts",
+    "recolorable": true,
+    "defaultColor": "#6b7280",
+    "file": "shirts/shirt-hoodie.png"
+  },
+  {
+    "id": "pants-jeans",
+    "name": "Jeans",
+    "category": "pants",
+    "recolorable": true,
+    "defaultColor": "#1e3a8a",
+    "file": "pants/pants-jeans.png"
+  },
+  {
+    "id": "pants-shorts",
+    "name": "Shorts",
+    "category": "pants",
+    "recolorable": true,
+    "defaultColor": "#65a30d",
+    "file": "pants/pants-shorts.png"
+  },
+  {
+    "id": "shoes-sneakers",
+    "name": "Sneakers",
+    "category": "shoes",
+    "recolorable": true,
+    "defaultColor": "#f5f5f5",
+    "file": "shoes/shoes-sneakers.png"
+  },
+  {
+    "id": "acc-cap",
+    "name": "Cap",
+    "category": "accessories",
+    "recolorable": true,
+    "defaultColor": "#dc2626",
+    "file": "accessories/acc-cap.png"
+  },
+  {
+    "id": "acc-glasses",
+    "name": "Glasses",
+    "category": "accessories",
+    "recolorable": false,
+    "file": "accessories/acc-glasses.png"
+  }
+]

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Avatar Customizer</title>
+  </head>
+  <body>
+    <div id="app">
+      <header class="app-header">
+        <h1>Avatar Customizer</h1>
+        <div id="model-toggle"></div>
+        <div class="header-actions">
+          <button id="btn-new" type="button">New</button>
+          <label class="button">
+            Import
+            <input id="file-import" type="file" accept="image/png" hidden />
+          </label>
+          <button id="btn-export" type="button" class="primary">Export PNG</button>
+        </div>
+      </header>
+
+      <main class="workspace">
+        <aside class="sidebar sidebar-left">
+          <div id="toolbar"></div>
+          <div id="color-picker"></div>
+        </aside>
+
+        <section class="editor-pane">
+          <div id="body-part-bar"></div>
+          <canvas id="editor-canvas" width="768" height="768"></canvas>
+          <p id="status" class="status">&nbsp;</p>
+        </section>
+
+        <section id="preview-pane" class="preview-pane">
+          <div class="preview-header">
+            <h2>Preview</h2>
+            <button id="preview-collapse" type="button" class="preview-collapse" title="Minimize preview">–</button>
+          </div>
+          <div id="preview-host" class="preview-host">
+            <canvas id="preview-canvas"></canvas>
+          </div>
+          <div id="preview-controls" class="preview-controls"></div>
+        </section>
+
+        <aside class="sidebar sidebar-right">
+          <div id="part-panel"></div>
+          <div id="layer-panel"></div>
+        </aside>
+      </main>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

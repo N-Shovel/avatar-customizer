@@ -1,0 +1,392 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 14px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 18px;
+}
+
+h2 {
+  margin: 0 0 8px;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+
+h3 {
+  margin: 10px 0 6px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+button,
+.button,
+select {
+  font: inherit;
+  color: var(--text);
+  background: var(--panel-raised);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+button:hover:not(:disabled),
+.button:hover {
+  border-color: var(--text-muted);
+}
+
+button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+button.primary {
+  background: var(--accent);
+  color: var(--accent-text);
+  border-color: var(--accent);
+  font-weight: 600;
+}
+
+.muted {
+  color: var(--text-muted);
+}
+
+/* ---- Layout ---- */
+
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  gap: var(--gap);
+  flex-wrap: wrap;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+  background: var(--panel);
+}
+
+.header-actions {
+  margin-left: auto;
+  display: flex;
+  gap: 8px;
+}
+
+.workspace {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 200px minmax(300px, 1fr) minmax(240px, 0.7fr) 260px;
+  gap: var(--gap);
+  padding: var(--gap);
+}
+
+.sidebar > div,
+.preview-pane {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+.editor-pane {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#editor-canvas {
+  width: 100%;
+  max-width: 768px;
+  aspect-ratio: 1;
+  image-rendering: pixelated;
+  border-radius: var(--radius);
+  cursor: crosshair;
+}
+
+.status {
+  margin: 8px 0 0;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* The preview stays on screen while you scroll, so every edit is visible on the model. */
+.preview-pane {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: sticky;
+  top: var(--gap);
+  align-self: start;
+  height: calc(100vh - 90px);
+  min-height: 420px;
+}
+
+.preview-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.preview-header h2 {
+  margin: 0;
+}
+
+.preview-collapse {
+  display: none;
+  padding: 0 8px;
+  line-height: 1.4;
+}
+
+.preview-host {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  border-radius: 6px;
+  background: radial-gradient(circle at 50% 40%, #2c313c, var(--bg) 75%);
+}
+
+.preview-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.turn-row {
+  display: grid;
+  grid-template-columns: auto 1fr 1fr auto;
+  gap: 6px;
+}
+
+.toggle-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  align-items: center;
+}
+
+.toggle-row .checkbox {
+  margin-top: 0;
+}
+
+.hint {
+  margin: 0;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.part-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 8px;
+  width: 100%;
+  max-width: 768px;
+}
+
+.part-chip {
+  padding: 4px 10px;
+  font-size: 12px;
+  border-radius: 999px;
+}
+
+.part-chip.active {
+  background: var(--accent);
+  color: var(--accent-text);
+  border-color: var(--accent);
+}
+
+@media (max-width: 1100px) {
+  .workspace {
+    grid-template-columns: 1fr;
+    padding-bottom: 380px;
+  }
+  .sidebar-left > div {
+    flex: 1;
+  }
+  .sidebar-left {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  /* Floating mini preview in the corner. */
+  .preview-pane {
+    position: fixed;
+    top: auto;
+    right: 12px;
+    bottom: 12px;
+    z-index: 10;
+    width: 260px;
+    height: 360px;
+    min-height: 0;
+    padding: 8px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+  }
+  .preview-collapse {
+    display: block;
+  }
+  .preview-pane .hint {
+    display: none;
+  }
+  .preview-pane.collapsed {
+    height: auto;
+    width: 140px;
+  }
+  .preview-pane.collapsed .preview-host,
+  .preview-pane.collapsed .preview-controls {
+    display: none;
+  }
+}
+
+/* ---- Controls ---- */
+
+.segmented {
+  display: flex;
+  gap: 12px;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 8px;
+  cursor: pointer;
+}
+
+.button-row {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.tool-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.tool-button.active {
+  background: var(--accent);
+  color: var(--accent-text);
+  border-color: var(--accent);
+}
+
+.color-input {
+  width: 100%;
+  height: 36px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: none;
+  cursor: pointer;
+}
+
+.swatches {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.swatch {
+  aspect-ratio: 1;
+  padding: 0;
+  border-radius: 4px;
+}
+
+/* ---- Parts ---- */
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.tab {
+  padding: 4px 8px;
+  font-size: 12px;
+}
+
+.tab.active,
+.part.active {
+  border-color: var(--accent);
+}
+
+.part-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.part {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 6px;
+  font-size: 11px;
+}
+
+.part img {
+  width: 100%;
+  aspect-ratio: 1;
+  image-rendering: pixelated;
+  background: var(--bg);
+  border-radius: 4px;
+}
+
+.tint-row {
+  display: block;
+  margin-top: 10px;
+  color: var(--text-muted);
+}
+
+/* ---- Layers ---- */
+
+.layer-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.layer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.layer.active {
+  border-color: var(--accent);
+  background: var(--panel-raised);
+}
